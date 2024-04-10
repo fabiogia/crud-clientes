@@ -20,14 +20,7 @@ const ClienteAdd = ({ onDataChange }: ClienteAddProps) => {
 
     const handleSubmitNew: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
-        await addCliente(clienteEdit
-            /*{
-            // id: `${count + 1}`,
-            id: 0,
-            codigo: newClienteCodigo,
-            nome: newClienteNome,
-        }*/
-        );
+        await addCliente(clienteEdit);
         setClienteEdit({} as ICliente);
         setModalOpen(false);
         // router.refresh();

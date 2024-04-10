@@ -13,9 +13,5 @@ export default async function Home() {
     },
   };
 
-  return (<>
-    {/* <div style={{ textAlign: "center", padding: "20px" }}>
-      <Link href="/clientes" style={styles.link}>Cadastro de Clientes</Link>
-    </div> */}
-  </>)
+  return (<></>)
 }

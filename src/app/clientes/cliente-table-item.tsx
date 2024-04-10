@@ -1,6 +1,5 @@
 'use client'
 
-//import { useRouter } from "next/navigation";
 import { deleteCliente, editCliente } from "./cliente-api";
 import { ICliente } from "./cliente-interfaces";
 import { FormEventHandler, useState } from "react";
@@ -13,7 +12,6 @@ interface ClienteListItemProps {
 }
 
 const ClienteListItem = ({ cliente, onDataChange }: ClienteListItemProps) => {
-    //const router = useRouter();
     const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
     const [openModalDeleted, setOpenModalDeleted] = useState<boolean>(false);
     const [clienteEdit, setClienteEdit] = useState<ICliente>(cliente);
@@ -22,7 +20,6 @@ const ClienteListItem = ({ cliente, onDataChange }: ClienteListItemProps) => {
         e.preventDefault();
         await editCliente(clienteEdit);
         setOpenModalEdit(false);
-        //router.refresh();
         //window.location.reload()
         onDataChange();
     };
@@ -30,8 +27,8 @@ const ClienteListItem = ({ cliente, onDataChange }: ClienteListItemProps) => {
     const handleDeleteCliente = async (id: number) => {
         await deleteCliente(id);
         setOpenModalDeleted(false);
-        //router.refresh();
-        window.location.reload()
+        //window.location.reload()
+        onDataChange();
     };
 
     const handleCancelarEdit: FormEventHandler<HTMLButtonElement> = async (e) => {

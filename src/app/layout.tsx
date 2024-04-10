@@ -18,9 +18,6 @@ export default function RootLayout({
   return (
     <html lang="pt-br" data-theme="light">
       <body className={`${inter.className}`}>
-        {/* <div>
-          <MenuSide /> Sistema Manager
-        </div> */}
         <div className=" bg-gray-200 h-full">
           <MenuSide />
           <div className="mt-16">

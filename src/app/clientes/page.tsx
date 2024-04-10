@@ -25,9 +25,7 @@ export default function ClienteIndex() {
     localStorage.setItem('pag-clientes', `${pagina}`)
     localStorage.setItem('tela-atual', 'Cadastro de Clientes')
 
-    console.log('1')
     getClientes(pagina, pageSize).then((v) => { setClientes(v) })
-    console.log('2')
   }, [pagina, dataRefresh])
 
   function forceRefresh() {

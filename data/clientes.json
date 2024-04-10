@@ -1,0 +1,44 @@
+{
+  "clientes": [
+    {
+      "id": "1",
+      "nome": "Cliente 10"
+    },
+    {
+      "id": "2",
+      "nome": "Cliente 2"
+    },
+    {
+      "id": "3",
+      "nome": "Cliente 3"
+    },
+    {
+      "id": "4",
+      "nome": "Cliente 4"
+    },
+    {
+      "id": "5",
+      "nome": "Cliente 5"
+    },
+    {
+      "id": "6",
+      "nome": "Cliente 6"
+    },
+    {
+      "id": "7",
+      "nome": "Cliente 7"
+    },
+    {
+      "id": "8",
+      "nome": "Cliente 8"
+    },
+    {
+      "id": "9",
+      "nome": "Cliente 9"
+    },
+    {
+      "id": "10",
+      "nome": "Cliente 10"
+    }
+  ]
+}

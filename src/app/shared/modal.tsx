@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 interface ModalProps {
     modalOpen: boolean;
     setModalOpen: (open: boolean) => boolean | void;
@@ -5,8 +7,18 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ modalOpen, setModalOpen, children }) => {
+    useEffect(() => {
+        var modal = document.getElementById("modal");
+        document.addEventListener('keydown', function (e) {
+            let keyCode = e.keyCode;
+            if (e.key === 'Escape') {
+                setModalOpen(false);
+            }
+        });
+    }, []);
+
     return (
-        <div className={`modal ${modalOpen ? "modal-open" : ""}`}>
+        <div id={'modal'} className={`modal ${modalOpen ? "modal-open" : ""}`}>
             <div className='modal-box relative'>
                 <label
                     onClick={() => setModalOpen(false)}

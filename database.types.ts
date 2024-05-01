@@ -16,6 +16,7 @@ export interface Database {
                     uf: string | null
                     cep: string | null
                     cpf: string | null
+                    fone: string | null
                 }
                 Insert: {
                     // the data to be passed to .insert()

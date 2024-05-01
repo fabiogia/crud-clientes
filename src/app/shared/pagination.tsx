@@ -31,7 +31,6 @@ export const Pagination = ({
     if (!paginationRange) paginationRange = [];
 
     if (currentPage === 0 || paginationRange.length < 2) {
-        console.log(paginationRange)
         return null;
     }
 

@@ -11,7 +11,6 @@ interface ClienteListProps {
 }
 
 const ClienteTable = ({ clientes, paginaAtual, onPageChange, onDataChange }: ClienteListProps) => {
-    console.log('ClienteTable')
     const pageSize = 10;
     const [currentPage, setCurrentPage] = useState<number>(paginaAtual);
 
@@ -26,7 +25,9 @@ const ClienteTable = ({ clientes, paginaAtual, onPageChange, onDataChange }: Cli
                 <thead>
                     <tr>
                         <th>Id</th>
+                        <th>Código</th>
                         <th>Nome</th>
+                        <th>Telefone</th>
                         <th>Ações</th>
                     </tr>
                 </thead>

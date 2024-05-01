@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <div className=" bg-gray-200 h-full">
           <MenuSide />
-          <div className="mt-16">
+          <div className="__mt-16">
             <div className="h-1">&nbsp;</div>
             {children}
           </div>

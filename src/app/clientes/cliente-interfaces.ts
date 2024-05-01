@@ -1,7 +1,8 @@
 export interface ICliente {
     id: number,
     codigo: string,
-    nome: string
+    nome: string,
+    fone: string
 }
 
 export interface IClienteList {

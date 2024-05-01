@@ -25,7 +25,7 @@ export async function getClientes(pagina: number, linhasPorPagina: number): Prom
     const rangeFim = rangeIni + (linhasPorPagina - 1);
     const supabase: SupabaseClient<any, "public", any> = supabaseBrowserClient();
     const { data, count } = await supabase.from("clientes")
-        .select("id, codigo, nome", { count: 'exact' }) // pessoa, ende, setor, cidade, uf, cpf, cep")
+        .select("id, codigo, nome, fone", { count: 'exact' }) // pessoa, ende, setor, cidade, uf, cpf, cep")
         .range(rangeIni, rangeFim)
         .order("id");
 
@@ -51,7 +51,7 @@ export const addCliente = async (cliente: ICliente): Promise<void> => {
 }
 
 export const editCliente = async (cliente: ICliente): Promise<void> => {
-    let clienteEd = { codigo: cliente.codigo, nome: cliente.nome }
+    let clienteEd = { codigo: cliente.codigo, nome: cliente.nome, fone: cliente.fone }
     await _criarSupabase().from("clientes").update(clienteEd).eq('id', cliente.id);
 
     // const res = await fetch(`${baseUrl}/clientes/${cliente.id}`, {
@@ -72,3 +72,10 @@ export const deleteCliente = async (id: number): Promise<void> => {
 
     await _criarSupabase().from("clientes").delete().eq('id', id);
 }
+
+// async function updateFone() {
+//     for (let i = 2; i <= 34; i++) {
+//         const fone = '(62) 9' + Math.floor(100 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000);
+//         await _criarSupabase().from("clientes").update({ fone: fone }).eq('id', i);
+//     }
+// }

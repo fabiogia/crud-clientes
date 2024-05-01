@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FiMenu } from 'react-icons/fi';
-import MenuSide from './shared/menu-side';
+import MenuSide from './shared/menu-side-v2';
 
 export default async function Home() {
   const styles = {
@@ -13,5 +13,5 @@ export default async function Home() {
     },
   };
 
-  return (<></>)
+  return (<><h1 className='pt-4 text-4xl text-center'>Sistema Manager</h1></>)
 }

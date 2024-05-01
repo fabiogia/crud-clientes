@@ -1,149 +1,148 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import { FiChevronDown, FiMenu, FiUser, FiX } from "react-icons/fi";
+import { useEffect, useRef } from "react";
+import { FiAperture, FiBookmark, FiChevronDown, FiChevronUp, FiHome, FiLogOut, FiMessageSquare, FiSearch, FiUser } from "react-icons/fi";
+
 
 export default function MenuSide() {
-    const [sidebarOpened, setSidebarOpened] = useState(false)
 
-    function menuToggle(e: any) {
-        e.preventDefault();
-
-        const navbar = document.getElementById("navbar");
-        const sidebar = document.getElementById("sidebar");
-        const btnSidebarToggler = document.getElementById("btnSidebarToggler");
-        const navClosed = document.getElementById("navClosed");
-        const navOpen = document.getElementById("navOpen");
-
-        sidebar!.classList.toggle("show");
-        setSidebarOpened(!sidebarOpened)
-
-        sidebar!.style.top = navbar!.clientHeight - 1 + "px";
+    const openSidebar = () => {
+        console.log('openSidebar');
+        document.querySelector(".sidebar")?.classList.toggle("hidden");
     }
 
-    function openCloseOption(elementId: string) {
-        var collapseEl = document.getElementById(elementId) as any;
-        collapseEl.classList.toggle('hidden');
+    const dropdown = (idSubmenu: string, idArrow: string) => {
+        console.log('dropdown');
+        document.querySelector(idSubmenu)?.classList.toggle("hidden");
+        document.querySelector(idArrow)?.classList.toggle("rotate-0");
     }
 
+    const iniciarDropDowns = () => {
+        console.log('iniciarDropDowns')
 
-    const telaAtual = localStorage.getItem('tela-atual') ?? '';
+        console.log(document.querySelector(".arrow"))
+        console.log(document.querySelector(".submenu"))
+        document.querySelector(".arrow")?.classList.toggle("rotate-0");
+        document.querySelector(".submenu")?.classList.toggle("hidden");
+    }
+
+    const initialized = useRef(false)
+
+    useEffect(() => {
+        if (!initialized.current) {
+            initialized.current = true
+            //iniciarDropDowns();
+        }
+    }, [])
 
     return (<>
-        {/* Navbar start */}
-        <nav id="navbar" className="fixed top-0 z-40 flex w-full flex-row bg-gray-800 px-4 h-16">
-            <button id="btnSidebarToggler" type="button" className="py-4 text-2xl text-white hover:text-gray-200"
-                onClick={menuToggle}>
-                {sidebarOpened ? <FiX /> : <FiMenu />}
-            </button>
-            <ul className="breadcrumb hidden flex-row items-center py-4 text-lg text-white sm:flex ml-2">
-                <li className="inline">
-                    <a href="#">Manager</a>
-                </li>
-                <li className="inline">
-                    <span>{telaAtual}</span>
-                </li>
-            </ul>
-        </nav>
-        {/* // -- Navbar end -- */}
-        {/* <!-- Sidebar start--> */}
-        <div id="containerSidebar" className="z-40">
-            <div className="navbar-menu relative z-40">
-                <nav id="sidebar"
-                    className="fixed left-0 bottom-0 flex w-3/4 -translate-x-full flex-col overflow-y-auto bg-gray-700 pt-6 pb-8 sm:max-w-xs lg:w-80">
-                    {/* <!-- one category / navigation group --> */}
-                    <div className="px-4 pb-6">
-                        <h3 className="mb-2 text-xs font-medium uppercase text-gray-500">
-                            Main
-                        </h3>
-                        <ul className="mb-8 text-sm font-medium">
-                            <li>
-                                <button type="button" className="flex items-center w-full py-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                    onClick={() => openCloseOption("dropdown-example")}>
-                                    <span className="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item="">Cadastros</span>
-                                    <FiChevronDown />
-                                </button>
-                                <ul id="dropdown-example" className="py-2 space-y-2 hidden">
-                                    <li>
-                                        <a className="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
-                                            href="/clientes">Clientes</a>
-                                    </li>
-                                    <li>
-                                        <a className="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11" target="_blank">Billing</a>
-                                    </li>
-                                    <li>
-                                        <a className="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11" target="_blank">Invoice</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a className="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-                                    href="#homepage">
-                                    <span className="select-none">Opção 1</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a className="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-                                    href="#link1">
-                                    <span className="select-none">Opção 2</span>
-                                </a>
-                            </li>
-                        </ul>
+        <span
+            className="absolute text-white text-4xl top-5 left-4 cursor-pointer"
+            onClick={() => openSidebar()}
+        >
+            <i className="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
+        </span>
+        <div
+            className="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900 prevent-select"
+        >
+            <div className="text-gray-100 text-xl">
+                <div className="p-2.5 mt-1 flex items-center">
+                    <div className="px-2 py-2 rounded-md bg-blue-600">
+                        <FiAperture />
                     </div>
-                    {/* <!-- navigation group end--> */}
-
-                    {/* <!-- example copies start --> */}
-                    <div className="px-4 pb-6">
-                        <h3 className="mb-2 text-xs font-medium uppercase text-gray-500">
-                            Opção 3
-                        </h3>
-                        <ul className="mb-8 text-sm font-medium">
-                            <li>
-                                <a className="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-                                    href="#tc">
-                                    <span className="select-none">Terms and Condition</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a className="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-                                    href="#privacy">
-                                    <span className="select-none">Opção 4</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a className="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-                                    href="#imprint">
-                                    <span className="select-none">Opção 5</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="px-4 pb-6">
-                        <h3 className="mb-2 text-xs font-medium uppercase text-gray-500">
-                            Others
-                        </h3>
-                        <ul className="mb-8 text-sm font-medium">
-                            <li>
-                                <a className="flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-                                    href="#ex1">
-                                    <span className="select-none">Opção 6</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a className="active flex items-center rounded py-3 pl-3 pr-4 text-gray-50 hover:bg-gray-600"
-                                    href="#ex2">
-                                    <span className="select-none">Opção 7</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    {/* <!-- example copies end --> */}
-                </nav>
+                    <h1 className="font-bold text-gray-200 text-[15px] ml-3">Manager</h1>
+                    <i
+                        className="bi bi-x cursor-pointer ml-28 lg:hidden"
+                        onClick={() => openSidebar()}
+                    ></i>
+                </div>
+                <div className="my-2 bg-gray-600 h-[1px]"></div>
             </div>
-            <div className="mx-auto lg:ml-80"></div>
-        </div>
-        {/* <!-- Sidebar end --> */}
+            <div
+                className="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white"
+            >
+                <FiSearch />
+                <input
+                    type="text"
+                    placeholder="Pesquisar"
+                    className="text-[15px] ml-4 w-full bg-transparent focus:outline-none"
+                />
+            </div>
 
+            <div
+                className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+            >
+                <FiHome />
+                <span className="text-[15px] ml-4 text-gray-200 font-bold"><a href="/">Home</a></span>
+            </div>
+
+            <div
+                className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+                onClick={() => dropdown('#submenu1', '#arrow1')}
+            >
+                <FiBookmark />
+                <div className="flex justify-between w-full items-center">
+                    <span className="text-[15px] ml-4 text-gray-200 font-bold">Cadastros</span>
+                    <span className="text-sm rotate-180 arrow" id="arrow1">
+                        <FiChevronUp />
+                    </span>
+                </div>
+            </div>
+            <div
+                className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold submenu hidden"
+                id="submenu1"
+            >
+                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                    <FiUser className="inline-block" />
+                    <span className="ml-2"><a href="/clientes">Clientes</a></span>
+                </h1>
+                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                    <FiBookmark className="inline-block" />
+                    <span className="ml-2">Exemplo</span>
+                </h1>
+                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                    <FiBookmark className="inline-block" />
+                    <span className="ml-2">Exemplo</span>
+                </h1>
+            </div>
+
+            <div className="my-4 bg-gray-600 h-[1px]"></div>
+
+            <div
+                className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+                onClick={() => dropdown('#submenu2', '#arrow2')}
+            >
+                <FiMessageSquare />
+                <div className="flex justify-between w-full items-center">
+                    <span className="text-[15px] ml-4 text-gray-200 font-bold">Exemplo</span>
+                    <span className="text-sm rotate-180 arrow" id="arrow2">
+                        <FiChevronUp />
+                    </span>
+                </div>
+            </div>
+            <div
+                className="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold submenu hidden"
+                id="submenu2"
+            >
+                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                    <FiMessageSquare className="inline-block" />
+                    <span className="ml-2">Exemplo</span>
+                </h1>
+                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                    <FiMessageSquare className="inline-block" />
+                    <span className="ml-2">Exemplo</span>
+                </h1>
+                <h1 className="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                    <FiMessageSquare className="inline-block" />
+                    <span className="ml-2">Exemplo</span>
+                </h1>
+            </div>
+            <div
+                className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+            >
+                <FiLogOut />
+                <span className="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
+            </div>
+        </div>
     </>)
 }
